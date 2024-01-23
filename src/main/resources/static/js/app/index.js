@@ -29,8 +29,10 @@ const index = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
-        }).then(res => res.json()).then(result => {
-            console.log(result);
+        }).then(res => {
+            if (!res.ok) throw new Error(res.status);
+            return res.json();
+        }).then(result => {
             alert('글이 등록되었습니다.');
             window.location.href = '/';
         }).catch(err => {
@@ -48,7 +50,10 @@ const index = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
-        }).then(res => res.json()).then(result => {
+        }).then(res => {
+            if (!res.ok) throw new Error(res.status);
+            return res.json();
+        }).then(result => {
             alert('글이 수정되었습니다.');
             window.location.href = '/';
         }).catch(err => {
@@ -61,7 +66,10 @@ const index = {
         fetch(`/api/v1/posts/${id}`, {
             method: 'DELETE',
             header: {'Content-Type': 'application/json'}
-        }).then(res => res.json()).then(result => {
+        }).then(res => {
+            if (!res.ok) throw new Error(res.status);
+            return res.json();
+        }).then(result => {
             alert('글이 삭제되었습니다.');
             window.location.href = '/';
         }).catch(err => {
